@@ -1,0 +1,113 @@
+# .NET Core build folders
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Rider
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+logs/*.log
+!logs/SAMPLE_LOG.md
+
+# NuGet
+*.nuget.props
+*.nuget.targets
+packages/
+
+# .NET Core
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.dll
+*.pdb
+*.exe
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.usertasks
+*.cache
+*.log
+
+# IDE - JetBrains Rider
+.idea/
+*.sln.iml
+.idea_modules/
+
+# Test Results
+TestResults/
+[Cc]overage/
+*.coverage
+*.coveragexml
+
+# Environment Files
+*.env
+appsettings.*.json
+!appsettings.json
+!appsettings.Example.json
+
+# NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+
+# Project-specific
+logs/
+!logs/.gitkeep
+
+# Other
+*.swp
+*.*~
+project.lock.json
+.project
+.settings
+.DS_Store
+
+# Docker
+.docker/
+docker-compose.override.yml

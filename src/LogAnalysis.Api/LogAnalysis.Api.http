@@ -1,0 +1,9 @@
+@LogAnalysis.Api_HostAddress = http://localhost:5001
+
+### Health Check
+GET {{LogAnalysis.Api_HostAddress}}/health
+Accept: application/json
+
+### Get Log Analysis
+GET {{LogAnalysis.Api_HostAddress}}/api/loganalysis
+Accept: application/json

@@ -1,85 +1,101 @@
+# Log Analysis Service
 
-# C# Tech Challenge
+This service processes WebRTC studio log files and exposes a Web API endpoint to retrieve structured user activity data.
 
-## Welcome!
+## Features
 
-We're excited for you to tackle this C# coding challenge! It’s designed to give us a quick glimpse into your technical skills, and how you approach problem-solving.
+- Log file processing and parsing
+- User activity tracking (JOIN/LEAVE events)
+- Unique user counting
+- Error aggregation by severity (ERROR, CRITICAL, WARNING)
+- RESTful API endpoint
+- Comprehensive test coverage
+- Docker support
 
-## Your Task (Estimated Time: **1–2 hours**)
+## Prerequisites
 
-You’ll build a small service that processes a log file (`logs/webrtc_studio.log`) and exposes a simple Web API to return structured user activity data.
+Choose one:
+- Docker and Docker Compose (recommended)
+- .NET 9.0 SDK or later
 
-### What to Build
+## Running with Docker (Recommended)
 
-1. **Log Processing**: Read and extract relevant data from the provided log file (e.g., timestamps, event types, user IDs).
-2. **Data Aggregation**:
-   - Return a list of all user activity events (JOIN/LEAVE with timestamp and userId).
-   - Calculate the **total number of unique users** who joined the call.
-3. **Web API**: Create a minimal API endpoint (`/api/loganalysis`) that returns the aggregated data in JSON format (see example below).
-4. **(Optional Stretch Goal)**: Extend your solution to also extract and count error messages by severity level (e.g., `ERROR`, `CRITICAL`, `WARNING`) and include them in the response.
+1. Clone the repository
+2. Navigate to the project directory
+3. Create a `logs` directory and place your log file:
+   ```bash
+   mkdir -p logs
+   # Copy your webrtc_studio.log file into the logs directory
+   ```
+4. Build and run with Docker:
+   ```bash
+   docker-compose up --build
+   ```
+5. Access the API:
+   - Swagger UI: http://localhost:5001/swagger
+   - API Endpoint: http://localhost:5001/api/loganalysis
+   - Health Check: http://localhost:5001/health
 
-### Example JSON Response
+## Running Locally (Alternative)
 
-```
+1. Clone the repository
+2. Navigate to the project directory
+3. Build the solution:
+   ```bash
+   dotnet build
+   ```
+4. Run the tests:
+   ```bash
+   dotnet test
+   ```
+5. Run the application:
+   ```bash
+   cd src/LogAnalysis.Api
+   dotnet run
+   ```
+
+The API will be available at:
+- HTTP: http://localhost:5000
+- HTTPS: https://localhost:5001
+
+## API Endpoint
+
+### GET /api/loganalysis
+
+Returns the analyzed log data including:
+- Total number of unique users
+- List of user activity events (JOIN/LEAVE)
+- Error counts by severity level
+
+Example Response:
+```json
 {
-    "uniqueUsers": 3,
-    "userActivity": [
-        {
-            "userId": "456",
-            "event": "JOIN",
-            "timestamp": "2023-10-27 10:01:00"
-        }
-        // ... more user activity events
-    ],
-    "errors": {
-        "ERROR": 4,
-        "CRITICAL": 2,
-        "WARNING": 3
-    } // Optional: Only included if stretch goal is implemented
+    "uniqueUsers": 3,
+    "userActivity": [
+        {
+            "userId": "456",
+            "event": "JOIN",
+            "timestamp": "2023-10-27 10:01:00"
+        }
+    ],
+    "errors": {
+        "ERROR": 4,
+        "CRITICAL": 2,
+        "WARNING": 3
+    }
 }
 ```
 
-## Submission & Timeline
+## Project Structure
 
-We’re excited to see what you build! Please follow the steps below to submit your solution.
+- `LogAnalysis.Api`: Web API project
+- `LogAnalysis.Core`: Core library containing log processing logic
+- `LogAnalysis.Tests`: Unit tests
 
-### How to Submit
+## Design Decisions
 
-* Clone this repository to your local machine.
-* In your GitHub account, create a new public repository for this project (e.g., [your-github-username]-log-analysis).
-* Copy any necessary files from this repo into your new one.
-* Develop your solution in a feature branch of your repository.
-* Include a README.md file in your repository with clear instructions on how to run your application from the CLI.
-* When you're done, open a pull request from your feature branch into the main branch of your repo.
-* In your pull request description, please include:
-  1. Any assumptions, design decisions, or trade-offs you made.
-  2. Key features and approaches you took.
-  3. Clear testing and review instructions.
-* ✅ Once submitted, please email us a link to your pull request.
-* 📌 You can also tag @livener-dev in the pull request description to notify our team directly.
-* ⏱️ Please ensure your submission is completed within the agreed time frame.
-
-## Evaluation
-
-### We'll be looking at:
-
-* **Correctness:** How accurately your code parses the log and aggregates the data.
-* **Code Quality:** Readability and maintainability.
-* **Testing:** How well you've covered key functionality with unit tests.
-* **Web API:** Functionality and JSON structure.
-
-**Note:** A working solution is required to proceed to the in-person stage of the interview.
-
-To ensure a smooth transition to the second part of the interview, please pay close attention to the `/api/loganalysis` endpoint. Your working solution here is essential for the next steps. Please double-check that it's functioning as expected!
-
-## Running Your Service
-
-Please provide instructions on how to run your application locally (e.g., commands, dependencies).
-
-## Log File & Format
-
-The log file (`webrtc_studio.log`) and a sample log file (`SAMPLE_LOG.md`) with the format details are located in the `/logs` directory.
-
-## We're Excited!
-
-We're excited to see your solution! Good luck!
+1. Used regular expressions for efficient log parsing
+2. Implemented async/await pattern for better scalability
+3. Separated concerns between API and core logic
+4. Added comprehensive error handling
+5. Included unit tests for core functionality

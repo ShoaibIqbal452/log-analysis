@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./logs:/app/logs
+      - ./src/LogAnalysis.Api:/app/src/LogAnalysis.Api
+      - ./src/LogAnalysis.Core:/app/src/LogAnalysis.Core
+      - /app/src/LogAnalysis.Api/bin/
+      - /app/src/LogAnalysis.Api/obj/
+      - /app/src/LogAnalysis.Core/bin/
+      - /app/src/LogAnalysis.Core/obj/
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+      - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=true
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
+      - ASPNETCORE_HOSTINGSTARTUPASSEMBLIES=Microsoft.AspNetCore.Watch.BrowserRefresh
+      - DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER=true

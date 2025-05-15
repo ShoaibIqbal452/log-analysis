@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0
+WORKDIR /app
+
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV DOTNET_WATCH_RESTART_ON_RUDE_EDIT=true
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+
+COPY NuGet.config .
+
+COPY src/LogAnalysis.Api/*.csproj src/LogAnalysis.Api/
+COPY src/LogAnalysis.Core/*.csproj src/LogAnalysis.Core/
+
+
+RUN dotnet restore src/LogAnalysis.Api/LogAnalysis.Api.csproj
+
+COPY . .
+
+ENTRYPOINT ["dotnet", "watch", "--project", "src/LogAnalysis.Api/LogAnalysis.Api.csproj"]
