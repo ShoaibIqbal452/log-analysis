@@ -16,7 +16,7 @@ This service processes WebRTC studio log files and exposes a Web API endpoint to
 
 Choose one:
 - Docker and Docker Compose (recommended)
-- .NET 9.0 SDK or later
+- .NET 7.0 SDK
 
 ## Running with Docker (Recommended)
 
@@ -55,8 +55,7 @@ Choose one:
    ```
 
 The API will be available at:
-- HTTP: http://localhost:5000
-- HTTPS: https://localhost:5001
+ - http://localhost:5001
 
 ## API Endpoint
 
